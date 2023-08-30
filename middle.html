@@ -8,6 +8,8 @@
     
     <input type="file" id="backgroundImageInput">
     <br>
+    <iframe src="\HA Codes Pack\HA Codes Pack\index.html" frameborder="0" style="width: 100%; height:90vh"></iframe>
+    <br>
     <input type="file" id="overlayImageInput">
     <button onclick="overlayImages()">Overlay Images</button>
     
@@ -50,7 +52,7 @@
                             canvas.height = backgroundImg.height;
 
                             ctx.drawImage(backgroundImg, 0, 0);
-                            ctx.drawImage(overlayImg,700, 400);
+                            ctx.drawImage(overlayImg,700, 10);
 
                             const overlayedDataURL = canvas.toDataURL('image/png');
                             resultImage.src = overlayedDataURL;

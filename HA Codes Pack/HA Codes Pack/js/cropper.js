@@ -1480,8 +1480,8 @@
       cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
       cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight); // The width/height of auto crop area must large than "minWidth/Height"
 
-      cropBoxData.width = Math.max(cropBoxData.minWidth, cropBoxData.width * autoCropArea);
-      cropBoxData.height = Math.max(cropBoxData.minHeight, cropBoxData.height * autoCropArea);
+      cropBoxData.width = 300;
+      cropBoxData.height =300;
       cropBoxData.left = canvasData.left + (canvasData.width - cropBoxData.width) / 2;
       cropBoxData.top = canvasData.top + (canvasData.height - cropBoxData.height) / 2;
       cropBoxData.oldLeft = cropBoxData.left;
