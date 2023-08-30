@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Overlay</title>
+</head>
+<body>
+    <h1>Image Overlay</h1>
+    
+    <input type="file" id="backgroundImageInput">
+    <br>
+    <input type="file" id="overlayImageInput">
+    <button onclick="overlayImages()">Overlay Images</button>
+    
+    <br>
+    <h2>Result:</h2>
+    <img id="resultImage" style="max-width: 100%;">
+    <br>
+    <a id="downloadLink" style="display: none;" download="overlayed_image.png">
+        <button>Download Overlayed Image</button>
+    </a>
+
+    <script>
+        function overlayImages() {
+            const backgroundImageInput = document.getElementById('backgroundImageInput');
+            const overlayImageInput = document.getElementById('overlayImageInput');
+            const positionXInput = document.getElementById('positionX');
+            const positionYInput = document.getElementById('positionY');
+            const resultImage = document.getElementById('resultImage');
+            const downloadLink = document.getElementById('downloadLink');
+
+            if (backgroundImageInput.files && backgroundImageInput.files[0] && overlayImageInput.files && overlayImageInput.files[0]) {
+                const backgroundFile = backgroundImageInput.files[0];
+                console.log(backgroundFile);
+                const overlayFile = overlayImageInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const backgroundImg = new Image();
+                    backgroundImg.src =e.target.result;
+                    
+                    backgroundImg.onload = function() {
+                        const overlayImg = new Image();
+                        overlayImg.src = URL.createObjectURL(overlayFile);
+
+                        overlayImg.onload = function() {
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+
+                            canvas.width = backgroundImg.width;
+                            canvas.height = backgroundImg.height;
+
+                            ctx.drawImage(backgroundImg, 0, 0);
+                            ctx.drawImage(overlayImg,700, 400);
+
+                            const overlayedDataURL = canvas.toDataURL('image/png');
+                            resultImage.src = overlayedDataURL;
+
+                            downloadLink.href = overlayedDataURL;
+                            downloadLink.style.display = 'block';
+                        };
+                    };
+                };
+
+                reader.readAsDataURL(backgroundFile);
+            }
+        }
+    </script>
+</body>
+</html>
